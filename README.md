@@ -35,7 +35,7 @@ $ docker run -d -p 4444:4444 --name selion-hub selion/hub:1.0.0-SNAPSHOT-M4
 ### Chrome and Firefox Grid Nodes
 
 ``` bash
-$ docker run -d --link selion-hub:hub selion/node-chrome:1.0.0-SNAPSHT-M4
+$ docker run -d --link selion-hub:hub selion/node-chrome:1.0.0-SNAPSHOT-M4
 $ docker run -d --link selion-hub:hub selion/node-firefox:1.0.0-SNAPSHOT-M4
 ```
 
