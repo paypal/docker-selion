@@ -17,8 +17,15 @@ ENV GRID_UNREGISTER_IF_STILL_DOWN_AFTER 30000
 COPY generate_config /opt/selion/generate_config
 RUN chmod 755 /opt/selion/generate_config
 
-# TODO handle similar to above
-COPY SeLionConfig.json $SELION_HOME/config/SeLionConfig.json
+# SeLionConfig configuration
+ENV SELGRID_RESTART_CYCLE 60000
+ENV SELGRID_UNIQUE_SESSION_COUNT 50
+ENV SELGRID_NODE_RECYCLE_THREAD_TIMEOUT 1200
+ENV SELGRID_NODE_AUTH "authorized"
+
+COPY generate_selionConfig /opt/selion/generate_selionConfig
+RUN chmod 755 /opt/selion/generate_selionConfig
+
 # Empty file to suppress downloads
 COPY download.json $SELION_HOME/config/download.json
 
