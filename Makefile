@@ -2,7 +2,7 @@ NAME := selion
 VERSION := $(or $(VERSION),$(VERSION),'1.0.0-SNAPSHOT-M4')
 PLATFORM := $(shell uname -s)
 
-all: hub hubsauce chrome
+all: hub hubsauce chrome firefox
 #standalone_firefox standalone_chrome standalone_debug_firefox standalone_debug_chrome
 
 build: all

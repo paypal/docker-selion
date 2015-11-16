@@ -22,7 +22,7 @@ RUN chmod 755 /opt/selion/generate_config
 ENV SELGRID_RESTART_CYCLE 60000
 ENV SELGRID_UNIQUE_SESSION_COUNT 50
 ENV SELGRID_NODE_RECYCLE_THREAD_TIMEOUT 1200
-ENV SELGRID_NODE_AUTH authorized
+ENV SELGRID_NODE_AUTH "authorized"
 
 COPY generate_selionConfig /opt/selion/generate_selionConfig
 RUN chmod 755 /opt/selion/generate_selionConfig

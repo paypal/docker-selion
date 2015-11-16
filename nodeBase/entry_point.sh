@@ -24,7 +24,7 @@ fi
 
 # TODO: Look into http://www.seleniumhq.org/docs/05_selenium_rc.jsp#browser-side-logs
 
-cd $SELION_HOME && xvfb-run --server-args="$DISPLAY -screen 0 $GEOMETRY -ac +extension RANDR" \
+cd $SELION_HOME && xvfb-run -a --server-args="$DISPLAY -screen 0 $GEOMETRY -ac +extension RANDR" \
   java -DselionHome=$SELION_HOME -jar $SELION_HOME/SeLion-Grid.jar \
     ${JAVA_OPTS} \
     -role node \
