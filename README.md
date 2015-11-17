@@ -21,7 +21,7 @@ Images included here:
 When executing docker run for an image with chrome browser please add volume mount `-v /dev/shm:/dev/shm` to use the host's shared memory.
 
 ``` bash
-$ docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selion/node_chrome:1.0.0-SNAPSHOT-M4
+$ docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selion/node_chrome:1.0.0-SNAPSHOT
 ```
 
 This is a workaround to node-chrome crash in docker container issue: https://code.google.com/p/chromium/issues/detail?id=519952
@@ -29,14 +29,14 @@ This is a workaround to node-chrome crash in docker container issue: https://cod
 ### Selion Grid Hub
 
 ``` bash
-$ docker run -d -p 4444:4444 --name selion-hub selion/hub:1.0.0-SNAPSHOT-M4
+$ docker run -d -p 4444:4444 --name selion-hub selion/hub:1.0.0-SNAPSHOT
 ```
 
 ### Chrome and Firefox Grid Nodes
 
 ``` bash
-$ docker run -d --link selion-hub:hub selion/node-chrome:1.0.0-SNAPSHOT-M4
-$ docker run -d --link selion-hub:hub selion/node-firefox:1.0.0-SNAPSHOT-M4
+$ docker run -d --link selion-hub:hub selion/node-chrome:1.0.0-SNAPSHOT
+$ docker run -d --link selion-hub:hub selion/node-firefox:1.0.0-SNAPSHOT
 ```
 
 ### Java Environment Options
@@ -44,7 +44,7 @@ $ docker run -d --link selion-hub:hub selion/node-firefox:1.0.0-SNAPSHOT-M4
 You can pass JAVA_OPTS environment variable to selenium java processes.
 
 ``` bash
-$ docker run -d -p 4444:4444 -e JAVA_OPTS=-Xmx512m --name selion-hub selion/hub:1.0.0-SNAPSHOT-M4
+$ docker run -d -p 4444:4444 -e JAVA_OPTS=-Xmx512m --name selion-hub selion/hub:1.0.0-SNAPSHOT
 ```
 
 ## Building the images
@@ -68,7 +68,7 @@ _Note: Omitting_ `VERSION=local` _will build the images with the current version
 ##### Example: Spawn a container for testing in Chrome:
 
 ``` bash
-$ docker run -d --name selion-hub -p 4444:4444 selion/hub:1.0.0-SNAPSHOT-M4
+$ docker run -d --name selion-hub -p 4444:4444 selion/hub:1.0.0-SNAPSHOT
 $ CH=$(docker run --rm --name=ch \
     --link selion-hub:hub -v /e2e/uploads:/e2e/uploads \
     selion/node-chrome:1.0.0-SNAPSHOT)
@@ -81,7 +81,7 @@ _Note:_ `-v /e2e/uploads:/e2e/uploads` _is optional in case you are testing brow
 This command line is the same as for Chrome. Remember that the Selenium running container is able to launch either Chrome or Firefox, the idea around having 2 separate containers, one for each browser is for convenience plus avoiding certain `:focus` issues your web app may encounter during end-to-end test automation.
 
 ``` bash
-$ docker run -d --name selenium-hub -p 4444:4444 selenium/hub:2.48.2
+$ docker run -d --name selion-hub -p 4444:4444 selion/hub:2.48.2
 $ FF=$(docker run --rm --name=fx \
     --link selion-hub:hub -v /e2e/uploads:/e2e/uploads \
     selion/node-firefox:2.48.2)

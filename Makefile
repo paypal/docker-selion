@@ -1,5 +1,5 @@
 NAME := selion
-VERSION := $(or $(VERSION),$(VERSION),'1.0.0-SNAPSHOT-M4')
+VERSION := $(or $(VERSION),$(VERSION),'1.0.0-SNAPSHOT')
 PLATFORM := $(shell uname -s)
 
 all: hub hubsauce chrome firefox
@@ -62,6 +62,7 @@ release: tag_latest
 	@if ! docker images $(NAME)/node-firefox | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/node-firefox version $(VERSION) is not yet built. Please run 'make build'"; false; fi
 	docker push $(NAME)/base
 	docker push $(NAME)/hub
+	docker push $(NAME)/hubsauce
 	docker push $(NAME)/node-base
 	docker push $(NAME)/node-chrome
 	docker push $(NAME)/node-firefox
@@ -78,6 +79,7 @@ test:
 	ci \
 	firefox \
 	hub \
+	hubsauce \
 	nodebase \
 	release \
 	tag_latest \

@@ -1,4 +1,4 @@
-FROM selion/base:1.0.0-SNAPSHOT-M4
+FROM selion/base:1.0.0-SNAPSHOT
 MAINTAINER Selion <selion@googlegroups.com>
 
 EXPOSE 4444
