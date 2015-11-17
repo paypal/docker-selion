@@ -20,10 +20,7 @@ ENV CHROME_DRIVER_VERSION 2.20
 RUN wget --no-verbose -O /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip \
   && rm -rf /opt/selion/chromedriver \
   && unzip /tmp/chromedriver_linux64.zip -d /opt/selion \
-  && rm /tmp/chromedriver_linux64.zip \
-  && mv /opt/selion/chromedriver /opt/selion/chromedriver-$CHROME_DRIVER_VERSION \
-  && chmod 755 /opt/selion/chromedriver-$CHROME_DRIVER_VERSION \
-  && ln -fs /opt/selion/chromedriver-$CHROME_DRIVER_VERSION /usr/bin/chromedriver
+  && rm /tmp/chromedriver_linux64.zip
 
 #========================
 # Selenium Configuration
