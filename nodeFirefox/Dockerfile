@@ -1,4 +1,4 @@
-FROM selion/node-base:1.0.0-SNAPSHOT
+FROM selion/node-base:1.0.0
 MAINTAINER Selion <selion@googlegroups.com>
 
 USER root

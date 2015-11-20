@@ -1,4 +1,4 @@
-FROM selion/base:1.0.0-SNAPSHOT
+FROM selion/base:1.0.0
 MAINTAINER Selion <selion@googlegroups.com>
 
 ENV DEBIAN_FRONTEND noninteractive

@@ -38,15 +38,15 @@ ENV SELENIUM_FIX 2
 # Selenium base was already using /opt
 ENV SELION_HOME /opt/selion
 
-# Download Webserver
 ENV SEL_SERVER https://selenium-release.storage.googleapis.com
 ENV REDIRECT_URL https://oss.sonatype.org/service/local/artifact/maven/redirect
+ENV REPO releases
 
 #=============================
 # Add selion + selenium server
 #=============================
 RUN  mkdir -p ${SELION_HOME} \
-  && wget --no-verbose "$REDIRECT_URL?r=snapshots&g=com.paypal.selion&a=SeLion-Grid&c=jar-with-dependencies&v=LATEST" -O $SELION_HOME/SeLion-Grid.jar \
+  && wget --no-verbose "$REDIRECT_URL?r=$REPO&g=com.paypal.selion&a=SeLion-Grid&c=jar-with-dependencies&v=RELEASE" -O $SELION_HOME/SeLion-Grid.jar \
   && wget --no-verbose $SEL_SERVER/$SELENIUM_VERSION/selenium-server-standalone-$SELENIUM_VERSION.$SELENIUM_FIX.jar -O /opt/selion/selenium-server-standalone.jar
 
 #========================================

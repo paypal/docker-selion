@@ -1,4 +1,4 @@
-# docker-seLion
+# docker-selion
 
 ## Docker images for SeLion (grid) server Hub and Node configurations with Chrome and Firefox.
 ## TODO add travis CI build and publish images to docker hub
@@ -12,16 +12,17 @@ These images build on the Selenium docker images here https://github.com/Seleniu
 Images included here:
 - __selion/base__: Base image which includes Java runtime, Selenium + SeLion JAR files
 - __selion/hub__: Image for running a Selion Grid Hub
-- __selion/hubSauce__: Image for running a Selion Grid SauceLabs hub
+- __selion/hubsauce__: Image for running a SeLion Grid SauceLabs hub
+- __selion/node-base__: Base image for the SeLion node images
 - __selion/node-chrome__: SeLion node with Chrome installed, needs to be connected to a SeLion Grid Hub
-- __selion/node-firefox__: Selion node with Firefox installed, needs to be connected to a SeLion Grid Hub
+- __selion/node-firefox__: SeLion node with Firefox installed, needs to be connected to a SeLion Grid Hub
 
 ## Running the images
 
 When executing docker run for an image with chrome browser please add volume mount `-v /dev/shm:/dev/shm` to use the host's shared memory.
 
 ``` bash
-$ docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selion/node_chrome:1.0.0-SNAPSHOT
+$ docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selion/node_chrome:1.0.0
 ```
 
 This is a workaround to node-chrome crash in docker container issue: https://code.google.com/p/chromium/issues/detail?id=519952
@@ -29,14 +30,14 @@ This is a workaround to node-chrome crash in docker container issue: https://cod
 ### Selion Grid Hub
 
 ``` bash
-$ docker run -d -p 4444:4444 --name selion-hub selion/hub:1.0.0-SNAPSHOT
+$ docker run -d -p 4444:4444 --name selion-hub selion/hub:1.0.0
 ```
 
 ### Chrome and Firefox Grid Nodes
 
 ``` bash
-$ docker run -d --link selion-hub:hub selion/node-chrome:1.0.0-SNAPSHOT
-$ docker run -d --link selion-hub:hub selion/node-firefox:1.0.0-SNAPSHOT
+$ docker run -d --link selion-hub:hub selion/node-chrome:1.0.0
+$ docker run -d --link selion-hub:hub selion/node-firefox:1.0.0
 ```
 
 ### Java Environment Options
@@ -44,7 +45,7 @@ $ docker run -d --link selion-hub:hub selion/node-firefox:1.0.0-SNAPSHOT
 You can pass JAVA_OPTS environment variable to selenium java processes.
 
 ``` bash
-$ docker run -d -p 4444:4444 -e JAVA_OPTS=-Xmx512m --name selion-hub selion/hub:1.0.0-SNAPSHOT
+$ docker run -d -p 4444:4444 -e JAVA_OPTS=-Xmx512m --name selion-hub selion/hub:1.0.0
 ```
 
 ## Building the images
@@ -68,7 +69,7 @@ _Note: Omitting_ `VERSION=local` _will build the images with the current version
 ##### Example: Spawn a container for testing in Chrome:
 
 ``` bash
-$ docker run -d --name selion-hub -p 4444:4444 selion/hub:1.0.0-SNAPSHOT
+$ docker run -d --name selion-hub -p 4444:4444 selion/hub:1.0.0
 $ CH=$(docker run --rm --name=ch \
     --link selion-hub:hub -v /e2e/uploads:/e2e/uploads \
     selion/node-chrome:1.0.0-SNAPSHOT)
@@ -81,10 +82,10 @@ _Note:_ `-v /e2e/uploads:/e2e/uploads` _is optional in case you are testing brow
 This command line is the same as for Chrome. Remember that the Selenium running container is able to launch either Chrome or Firefox, the idea around having 2 separate containers, one for each browser is for convenience plus avoiding certain `:focus` issues your web app may encounter during end-to-end test automation.
 
 ``` bash
-$ docker run -d --name selion-hub -p 4444:4444 selion/hub:2.48.2
+$ docker run -d --name selion-hub -p 4444:4444 selion/hub:1.0.0
 $ FF=$(docker run --rm --name=fx \
     --link selion-hub:hub -v /e2e/uploads:/e2e/uploads \
-    selion/node-firefox:2.48.2)
+    selion/node-firefox:1.0.0)
 ```
 
 _Note: Since a Docker container is not meant to preserve state and spawning a new one takes less than 3 seconds you will likely want to remove containers after each end-to-end test with_ `--rm` _command. You need to think of your Docker containers as single processes, not as running virtual machines, in case you are familiar with [Vagrant](https://www.vagrantup.com/)._
@@ -96,3 +97,7 @@ All output is sent to stdout so it can be inspected by running:
 ``` bash
 $ docker logs -f <container-id|container-name>
 ```
+
+License
+-------
+[The Apache Software License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
