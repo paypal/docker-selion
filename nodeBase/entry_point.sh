@@ -22,6 +22,10 @@ if [ ! -z "$REMOTE_HOST" ]; then
   REMOTE_HOST_PARAM="-remoteHost $REMOTE_HOST"
 fi
 
+if [ ! -z "$SELION_OPTS" ]; then
+  echo "appending SeLion options: ${SELION_OPTS}"
+fi
+
 # TODO: Look into http://www.seleniumhq.org/docs/05_selenium_rc.jsp#browser-side-logs
 
 cd $SELION_HOME && xvfb-run --server-args="$DISPLAY -screen 0 $GEOMETRY -ac +extension RANDR" \
@@ -31,7 +35,8 @@ cd $SELION_HOME && xvfb-run --server-args="$DISPLAY -screen 0 $GEOMETRY -ac +ext
     -hub http://$HUB_PORT_4444_TCP_ADDR:$HUB_PORT_4444_TCP_PORT/grid/register \
     -noContinuousRestart \
     ${REMOTE_HOST_PARAM} \
-    -nodeConfig $SELION_HOME/config.json &
+    -nodeConfig $SELION_HOME/config.json \
+    ${SELION_OPTS} &
 NODE_PID=$!
 
 trap shutdown SIGTERM SIGINT

@@ -22,13 +22,18 @@ function shutdown {
     echo "shutdown complete"
 }
 
+if [ ! -z "$SELION_OPTS" ]; then
+  echo "appending SeLion options: ${SELION_OPTS}"
+fi
+
 cd $SELION_HOME && java -DselionHome=$SELION_HOME ${JAVA_OPTS} \
   -classpath $SELION_HOME/selenium-server-standalone.jar:$SELION_HOME/SeLion-Grid.jar \
   -jar $SELION_HOME/SeLion-Grid.jar \
   -role hub \
   -hubConfig $CONF \
 	-selionConfig /opt/selion/config/SeLionConfig.json \
-  -noContinuousRestart &
+  -noContinuousRestart \
+  ${SELION_OPTS} &
 NODE_PID=$!
 
 trap shutdown SIGTERM SIGINT

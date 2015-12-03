@@ -2,22 +2,20 @@ NAME := selion
 VERSION := $(or $(VERSION),$(VERSION),'1.0.0')
 PLATFORM := $(shell uname -s)
 
-all: hub hubsauce chrome firefox
+all: hub chrome firefox
 
 build: all
 
 ci: build test
 
-generate_all:	\
+generate_all: \
 	generate_hub \
-	generate_hubsauce \
-	generate_chrome
+	generate_nodebase \
+	generate_chrome \
+	generate_firefox
 
 generate_hub:
 	cd ./hub && ./generate.sh $(VERSION)
-
-generate_hubsauce:
-	cd ./hubSauce && ./generate.sh $(VERSION)
 
 generate_nodebase:
 	cd ./nodeBase && ./generate.sh $(VERSION)
@@ -33,9 +31,6 @@ base:
 
 hub: base generate_hub
 	cd ./hub && docker build -t $(NAME)/hub:$(VERSION) .
-
-hubsauce: base generate_hubsauce
-	cd ./hubSauce && docker build -t $(NAME)/hubsauce:$(VERSION) .
 
 nodebase: base generate_nodebase
 	cd ./nodeBase && docker build -t $(NAME)/node-base:$(VERSION) .
@@ -56,17 +51,15 @@ tag_latest:
 release: tag_latest
 	@if ! docker images $(NAME)/base | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/base version $(VERSION) is not yet built. Please run 'make build'"; false; fi
 	@if ! docker images $(NAME)/hub | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/hub version $(VERSION) is not yet built. Please run 'make build'"; false; fi
-	@if ! docker images $(NAME)/hubsauce | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/hub version $(VERSION) is not yet built. Please run 'make build'"; false; fi
 	@if ! docker images $(NAME)/node-base | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/node-base version $(VERSION) is not yet built. Please run 'make build'"; false; fi
 	@if ! docker images $(NAME)/node-chrome | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/node-chrome version $(VERSION) is not yet built. Please run 'make build'"; false; fi
 	@if ! docker images $(NAME)/node-firefox | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/node-firefox version $(VERSION) is not yet built. Please run 'make build'"; false; fi
 	docker push $(NAME)/base
 	docker push $(NAME)/hub
-	docker push $(NAME)/hubsauce
 	docker push $(NAME)/node-base
 	docker push $(NAME)/node-chrome
 	docker push $(NAME)/node-firefox
-	@echo "*** Don't forget to create a tag. git tag rel-$(VERSION) && git push origin rel-$(VERSION)"
+	@echo "*** Don't forget to create a tag. git tag v$(VERSION) && git push origin v$(VERSION)"
 
 test:
 	./test.sh
@@ -79,7 +72,6 @@ test:
 	ci \
 	firefox \
 	hub \
-	hubsauce \
 	nodebase \
 	release \
 	tag_latest \
