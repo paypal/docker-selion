@@ -12,7 +12,6 @@ These images build on the Selenium docker images here https://github.com/Seleniu
 Images included here:
 - __selion/base__: Base image which includes Java runtime, Selenium + SeLion JAR files
 - __selion/hub__: Image for running a Selion Grid Hub
-- __selion/hubsauce__: Image for running a SeLion Grid SauceLabs hub
 - __selion/node-base__: Base image for the SeLion node images
 - __selion/node-chrome__: SeLion node with Chrome installed, needs to be connected to a SeLion Grid Hub
 - __selion/node-firefox__: SeLion node with Firefox installed, needs to be connected to a SeLion Grid Hub
@@ -31,6 +30,16 @@ This is a workaround to node-chrome crash in docker container issue: https://cod
 
 ``` bash
 $ docker run -d -p 4444:4444 --name selion-hub selion/hub:1.0.0
+```
+
+### SELION_OPTS options
+
+You can pass `SELION_OPTS` variable with additional commandline parameters for starting a hub or a node. So to run a SeLion sauce hub.
+
+### Selion Grid Sauce Hub
+
+``` bash
+$ docker run -d -p 4444:4444 -e SELION_OPTS="-type sauce" --name selion-hub selion/hub:1.0.0
 ```
 
 ### Chrome and Firefox Grid Nodes
