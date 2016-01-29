@@ -2,6 +2,7 @@
 
 ## Docker images for SeLion (grid) server Hub and Node configurations with Chrome and Firefox.
 
+[![Build Status](https://travis-ci.org/paypal/docker-selion.svg?branch=develop)](https://travis-ci.org/paypal/docker-selion)
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/paypal/SeLion?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Find us on [Gitter](https://gitter.im/paypal/SeLion)
