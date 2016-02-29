@@ -1,0 +1,28 @@
+FROM selion/node-base:<version>
+MAINTAINER Selion <selion@googlegroups.com>
+
+ENV PJS_VERSION 1.9.8
+
+USER root
+
+#==============
+# PhantomJS
+#==============
+RUN apt-get update -y 
+RUN apt-get install bzip2 libfreetype6 libfontconfig1 -y
+RUN wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PJS_VERSION-linux-x86_64.tar.bz2
+RUN tar -xvjf phantomjs-$PJS_VERSION-linux-x86_64.tar.bz2 && rm phantomjs-$PJS_VERSION-linux-x86_64.tar.bz2
+RUN mv /phantomjs-$PJS_VERSION-linux-x86_64 /usr/local/phantomjs-$PJS_VERSION-linux-x86_64
+RUN ln -s /usr/local/phantomjs-$PJS_VERSION-linux-x86_64/bin/phantomjs /opt/selion/phantomjs
+
+#========================
+# Selion Configuration
+#========================
+COPY config.json /opt/selion/config.json
+
+# Empty file to suppress downloads
+COPY download.json $SELION_HOME/config/download.json
+
+RUN chown -R seluser /opt/selion
+
+USER seluser
