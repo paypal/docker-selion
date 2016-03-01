@@ -2,7 +2,7 @@ NAME := selion
 VERSION := $(or $(VERSION),$(VERSION),'1.0.0')
 PLATFORM := $(shell uname -s)
 
-all: hub chrome firefox phantomjs
+all: hub chrome firefox
 
 build: all
 
