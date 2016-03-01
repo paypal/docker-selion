@@ -5,7 +5,7 @@
 		"maxInstances": 1,
 		"acceptSslCerts": true,
 		"javascriptEnabled": true,
-      	"takesScreenshot": true
+		"takesScreenshot": true
 	}
 	],
 	"configuration": {
@@ -16,7 +16,6 @@
 		 "proxy": "com.paypal.selion.proxy.SeLionRemoteProxy",
 		 "maxSession": 1,
 		 "port": 5555,
-    	 "register": true
+		 "register": true
 	}
 }
-	
