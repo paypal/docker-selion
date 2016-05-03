@@ -5,4 +5,6 @@ language: c
 services:
   - docker
 
-script: make
+script:
+  - docker version
+  - VERSION=develop SELION_GRID_VERSION=1.1.0-SNAPSHOT REPO=snapshots SELENIUM_VERSION=2.53 SELENIUM_FIX=0 make ci

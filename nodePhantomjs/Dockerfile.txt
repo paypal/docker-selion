@@ -1,6 +1,6 @@
 MAINTAINER Selion <selion@googlegroups.com>
 
-ENV PJS_VERSION 1.9.8
+ENV PJS_VERSION 2.1.1
 
 USER root
 
@@ -9,7 +9,7 @@ USER root
 #==============
 RUN apt-get update -y
 RUN apt-get install bzip2 libfreetype6 libfontconfig1 -y
-RUN wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PJS_VERSION-linux-x86_64.tar.bz2
+COPY deps/* /
 RUN tar -xvjf phantomjs-$PJS_VERSION-linux-x86_64.tar.bz2 && rm phantomjs-$PJS_VERSION-linux-x86_64.tar.bz2
 RUN mv /phantomjs-$PJS_VERSION-linux-x86_64 /usr/local/phantomjs-$PJS_VERSION-linux-x86_64
 RUN ln -s /usr/local/phantomjs-$PJS_VERSION-linux-x86_64/bin/phantomjs /opt/selion/phantomjs

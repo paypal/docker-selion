@@ -1,19 +1,27 @@
 NAME := selion
 VERSION := $(or $(VERSION),$(VERSION),'1.0.0')
 PLATFORM := $(shell uname -s)
+SELION_GRID_VERSION := $(or $(SELION_GRID_VERSION), $(SELION_GRID_VERSION), 'RELEASE')
+REPO := $(or $(REPO), $(REPO), 'releases')
+SELENIUM_VERSION := $(or $(SELENIUM_VERSION), $(SELENIUM_VERSION), '2.48')
+SELENIUM_FIX := $(or $(SELENIUM_FIX), $(SELENIUM_FIX), '2')
 
-all: hub chrome firefox
+all: hub chrome firefox phantomjs
 
 build: all
 
 ci: build test
 
 generate_all: \
+	generate_base \
 	generate_hub \
 	generate_nodebase \
 	generate_chrome \
 	generate_firefox \
 	generate_phantomjs
+
+generate_base:
+	cd ./base && ./generate.sh $(SELENIUM_VERSION) $(SELENIUM_FIX) $(REPO) $(SELION_GRID_VERSION)
 
 generate_hub:
 	cd ./hub && ./generate.sh $(VERSION)
@@ -30,7 +38,7 @@ generate_firefox:
 generate_phantomjs:
 	cd ./nodePhantomjs && ./generate.sh $(VERSION)
 
-base:
+base: generate_base
 	cd ./base && docker build -t $(NAME)/base:$(VERSION) .
 
 hub: base generate_hub
@@ -72,7 +80,7 @@ release: tag_latest
 	@echo "*** Don't forget to create a tag. git tag v$(VERSION) && git push origin v$(VERSION)"
 
 test:
-	./test.sh
+	VERSION=$(VERSION) ./test.sh
 
 .PHONY: \
 	all \

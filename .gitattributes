@@ -1,0 +1,4 @@
+# Normalize all text files with LF when stored but 
+# convert to the OS's native line endings on checkout
+* text
+*.tar.bz2 binary
