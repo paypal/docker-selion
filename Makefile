@@ -64,16 +64,10 @@ tag_latest:
 	docker tag $(NAME)/node-firefox:$(VERSION) $(NAME)/node-firefox:latest
 	docker tag $(NAME)/node-phantomjs:$(VERSION) $(NAME)/node-phantomjs:latest
 
-check_release_version:
-	@if [[ ! $(VERSION) =~ [[:digit:]].[[:digit:]].[[:digit:]] ]]; then echo "'$(VERSION)' is not an acceptable revision for a release target."; false; fi
-
-release: check_release_version tag_latest deploy
+release: tag_latest deploy
 	@echo "*** Don't forget to create a tag. git tag v$(VERSION) && git push origin v$(VERSION)"
 
-check_dev_release_version:
-		@if [[ $(VERSION) =~ [[:digit:]].[[:digit:]].[[:digit:]] ]]; then echo "'$(VERSION)' is not an acceptable revision for a develop target."; false; fi
-
-dev_release: check_dev_release_version deploy
+dev_release: deploy
 
 deploy:
 	@if ! docker images $(NAME)/base | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/base version $(VERSION) is not yet built. Please run 'make build'"; false; fi
