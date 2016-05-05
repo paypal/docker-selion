@@ -21,7 +21,7 @@ if [ "$TRAVIS_REPO_SLUG" = "paypal/docker-selion" ] && [ "$TRAVIS_PULL_REQUEST" 
         echo "Failed to authenticate with Docker registry."
         exit 1
       fi
-      make dev_release
+      VERSION="$VERSION" make dev_release
     else
         echo "Not on the develop branch."
         exit 1

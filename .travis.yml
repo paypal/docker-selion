@@ -6,7 +6,7 @@ script:
   - docker version
   - VERSION=develop SELION_GRID_VERSION=1.1.0-SNAPSHOT REPO=snapshots SELENIUM_VERSION=2.53 SELENIUM_FIX=0 make ci
 after_success:
-  - sh -e travis-deploy-to-docker-registry.sh
+  - VERSION=develop sh -e travis-deploy-to-docker-registry.sh
 notifications:
   irc:
     channels:
