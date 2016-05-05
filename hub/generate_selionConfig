@@ -3,8 +3,6 @@
 echo "
 {
   \"restartCycle\": $SELGRID_RESTART_CYCLE,
-  \"uniqueSessionCount\": $SELGRID_UNIQUE_SESSION_COUNT,
-  \"nodeRecycleThreadWaitTimeout\": $SELGRID_NODE_RECYCLE_THREAD_TIMEOUT,
   \"customProcessHandler\": \"com.paypal.selion.utils.process.UnixProcessHandler\",
   \"artifactMaxFileSize\": 1073741824,
   \"artifactExpiryInMilliSec\": 86400000,

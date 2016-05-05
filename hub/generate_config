@@ -5,6 +5,7 @@ echo "
   \"servlets\": [
       \"com.paypal.selion.grid.servlets.LoginServlet\",
       \"com.paypal.selion.grid.servlets.ListAllNodes\",
+      \"com.paypal.selion.grid.servlets.GridStatistics\",
       \"com.paypal.selion.grid.servlets.GridAutoUpgradeDelegateServlet\",
       \"com.paypal.selion.grid.servlets.GridForceRestartDelegateServlet\",
       \"com.paypal.selion.grid.servlets.PasswordChangeServlet\",
@@ -22,5 +23,7 @@ echo "
   \"timeout\": $GRID_TIMEOUT,
   \"browserTimeout\": $GRID_BROWSER_TIMEOUT,
   \"maxSession\": $GRID_MAX_SESSION,
-  \"unregisterIfStillDownAfter\": $GRID_UNREGISTER_IF_STILL_DOWN_AFTER
+  \"unregisterIfStillDownAfter\": $GRID_UNREGISTER_IF_STILL_DOWN_AFTER,
+  \"uniqueSessionCount\": $SELGRID_UNIQUE_SESSION_COUNT,
+  \"nodeRecycleThreadWaitTimeout\": $SELGRID_NODE_RECYCLE_THREAD_TIMEOUT
 }"

@@ -13,6 +13,7 @@ DOCKER_PASSWORD=${DOCKER_PASSWORD-bar}
 if [ "$TRAVIS_REPO_SLUG" = "paypal/docker-selion" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" = "develop" ]; then
     echo "Deploying to Docker registry...\n"
     # verify that we are on develop branch, otherwise exit with error code
+    git checkout develop
     output=$(git rev-parse --abbrev-ref HEAD)
     if [ "$output" = "develop" ]; then
       docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
