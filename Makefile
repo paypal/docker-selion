@@ -76,12 +76,12 @@ check_dev_release_version:
 dev_release: check_dev_release_version deploy
 
 deploy:
-	@if ! docker images $(NAME)/base:$(VERSION) | grep -q -F $(VERSION); then echo "$(NAME)/base version $(VERSION) is not yet built. Please run 'make build'"; false; fi
-	@if ! docker images $(NAME)/hub:$(VERSION) | grep -q -F $(VERSION); then echo "$(NAME)/hub version $(VERSION) is not yet built. Please run 'make build'"; false; fi
-	@if ! docker images $(NAME)/node-base:$(VERSION) | grep -q -F $(VERSION); then echo "$(NAME)/node-base version $(VERSION) is not yet built. Please run 'make build'"; false; fi
-	@if ! docker images $(NAME)/node-chrome:$(VERSION) | grep -q -F $(VERSION); then echo "$(NAME)/node-chrome version $(VERSION) is not yet built. Please run 'make build'"; false; fi
-	@if ! docker images $(NAME)/node-firefox:$(VERSION) | grep -q -F $(VERSION); then echo "$(NAME)/node-firefox version $(VERSION) is not yet built. Please run 'make build'"; false; fi
-	@if ! docker images $(NAME)/node-phantomjs:$(VERSION) | grep -q -F $(VERSION); then echo "$(NAME)/node-phantomjs version $(VERSION) is not yet built. Please run 'make build'"; false; fi
+	@if ! docker images $(NAME)/base | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/base version $(VERSION) is not yet built. Please run 'make build'"; false; fi
+	@if ! docker images $(NAME)/hub | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/hub version $(VERSION) is not yet built. Please run 'make build'"; false; fi
+	@if ! docker images $(NAME)/node-base | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/node-base version $(VERSION) is not yet built. Please run 'make build'"; false; fi
+	@if ! docker images $(NAME)/node-chrome | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/node-chrome version $(VERSION) is not yet built. Please run 'make build'"; false; fi
+	@if ! docker images $(NAME)/node-firefox | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/node-firefox version $(VERSION) is not yet built. Please run 'make build'"; false; fi
+	@if ! docker images $(NAME)/node-phantomjs | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/node-phantomjs version $(VERSION) is not yet built. Please run 'make build'"; false; fi
 	docker push $(NAME)/base:$(VERSION)
 	docker push $(NAME)/hub:$(VERSION)
 	docker push $(NAME)/node-base:$(VERSION)
