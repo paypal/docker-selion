@@ -16,7 +16,7 @@ if [ "$TRAVIS_REPO_SLUG" = "paypal/docker-selion" ] && [ "$TRAVIS_PULL_REQUEST" 
     git checkout develop
     output=$(git rev-parse --abbrev-ref HEAD)
     if [ "$output" = "develop" ]; then
-      docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+      docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" -e "$DOCKER_EMAIL"
       if [ $? -ne 0 ]; then
         echo "Failed to authenticate with Docker registry."
         exit 1
