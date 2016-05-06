@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 DEBUG=''
-VERSION=${VERSION-1.0.0}
+VERSION=${VERSION-develop}
 
 if [ -n "$1" ] && [ $1 == 'debug' ]; then
   DEBUG='-debug'

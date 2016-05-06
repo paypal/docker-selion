@@ -25,7 +25,10 @@ RUN apt-get clean \
 #==============================
 # Scripts to run Selion Node
 #==============================
-COPY entry_point.sh /opt/selion/entry_point.sh
+COPY \
+  entry_point.sh \
+  functions.sh \
+  /opt/selion/
 RUN chmod +x /opt/selion/entry_point.sh
 
 #============================

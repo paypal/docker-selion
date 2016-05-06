@@ -1,0 +1,13 @@
+MAINTAINER Selion <selion@googlegroups.com>
+
+USER root
+
+#====================================
+# Scripts to run Standalone
+#====================================
+COPY entry_point.sh /opt/selion/entry_point.sh
+RUN chmod +x /opt/selion/entry_point.sh
+
+USER seluser
+
+EXPOSE 4444

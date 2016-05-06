@@ -15,6 +15,8 @@ Images included here:
 - __selion/node-base__: Base image for the SeLion node images
 - __selion/node-chrome__: SeLion node with Chrome installed, needs to be connected to a SeLion Grid Hub
 - __selion/node-firefox__: SeLion node with Firefox installed, needs to be connected to a SeLion Grid Hub
+- __selion/standalone-chrome__: SeLion standalone with Chrome installed
+- __selion/standalone-firefox__: SeLion standalone with Firefox installed
 
 ## Running the images
 
@@ -71,7 +73,7 @@ Clone the repo and from the project directory root you can build everything by r
 $ VERSION=local make build
 ```
 
-_Note: Omitting_ `VERSION=local` _will build the images with the current version number thus overwriting the images downloaded from [Docker Hub](https://registry.hub.docker.com/)._
+_Note: Omitting_ `VERSION=local` _will build the images with the develop version number thus overwriting the images downloaded from [Docker Hub](https://registry.hub.docker.com/)._
 
 ## Using the images
 

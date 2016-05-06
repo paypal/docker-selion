@@ -4,3 +4,5 @@ nodeBase/Dockerfile
 nodeChrome/Dockerfile
 nodeFirefox/Dockerfile
 nodePhantomjs/Dockerfile
+standaloneChrome/Dockerfile
+standaloneFirefox/Dockerfile
