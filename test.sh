@@ -17,7 +17,7 @@ docker logs -f $HUB &
 sleep 2
 
 echo 'Starting Selion Chrome node...'
-NODE_CHROME=$(docker run -d --link $HUB_NAME:hub  selion/node-chrome$DEBUG:$VERSION)
+NODE_CHROME=$(docker run -d --link $HUB_NAME:hub -v /dev/shm:/dev/shm selion/node-chrome$DEBUG:$VERSION)
 echo 'Starting Selion Firefox node...'
 NODE_FIREFOX=$(docker run -d --link $HUB_NAME:hub selion/node-firefox$DEBUG:$VERSION)
 echo 'Starting Selion Phantomjs node...'

@@ -150,11 +150,11 @@ clean:
 	@if [ -f standaloneChrome/Dockerfile ]; then rm standaloneChrome/Dockerfile; fi
 	@if [ -f standaloneFirefox/Dockerfile ]; then rm standaloneFirefox/Dockerfile; fi
 	@if [ -f standalonePhantomjs/Dockerfile ]; then rm standalonePhantomjs/Dockerfile; fi
-	@echo "Removing all exited selion $(VERSION) containers ..."
+	@echo "Removing all exited $(NAME) $(VERSION) containers ..."
 	@if [ `docker ps -a | grep $(NAME) | grep Exit | grep $(VERSION) | awk '{print $$1}' | wc -l | sed -e 's/^[ \t]*//'` -ne 0 ]; then\
 		docker rm `docker ps -a | grep Exit | grep $(NAME) | grep $(VERSION) | awk '{print $$1}'`;\
 	fi
-	@echo "Removing all $(NAME) $(VERSION) images..."
+	@echo "Removing all $(NAME) $(VERSION) images ..."
 	@if [ `docker images | grep $(NAME) | grep $(VERSION) | awk '{print $$3}' | wc -l | sed -e 's/^[ \t]*//'` -ne 0 ]; then\
 		docker rmi -f `docker images | grep $(NAME) | grep $(VERSION) | awk '{print $$3}'`;\
 	fi

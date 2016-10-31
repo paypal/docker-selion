@@ -19,7 +19,7 @@ function test_standalone {
   TEST_CMD="node smoke-$BROWSER.js"
 
   echo Running test container...
-  docker run -it --link $SA_NAME:hub -e "TEST_CMD=$TEST_CMD" selion/test:$VERSION
+  docker run -it --link $SA_NAME:hub -v /dev/shm:/dev/shm -e "TEST_CMD=$TEST_CMD" selion/test:$VERSION
   STATUS=$?
   TEST_CONTAINER=$(docker ps -aq | head -1)
 
