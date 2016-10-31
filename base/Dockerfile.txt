@@ -48,7 +48,7 @@ ENV SELION_GRID_VERSION=%SELION_GRID_VERSION%
 #=============================
 RUN  mkdir -p ${SELION_HOME} \
   && wget --no-verbose "$REDIRECT_URL?r=$REPO&g=com.paypal.selion&a=SeLion-Grid&c=jar-with-dependencies&v=$SELION_GRID_VERSION" -O $SELION_HOME/SeLion-Grid.jar \
-  && wget --no-verbose $SEL_SERVER/$SELENIUM_VERSION/selenium-server-standalone-$SELENIUM_VERSION.$SELENIUM_FIX.jar -O /opt/selion/selenium-server-standalone.jar
+  && wget --no-verbose $SEL_SERVER/$SELENIUM_VERSION/selenium-server-standalone-$SELENIUM_VERSION.$SELENIUM_FIX.jar -O $SELION_HOME/selenium-server-standalone.jar
 
 #========================================
 # Add normal user with passwordless sudo
@@ -57,3 +57,9 @@ RUN sudo useradd seluser --shell /bin/bash --create-home \
   && sudo usermod -a -G sudo seluser \
   && echo 'ALL ALL = (ALL) NOPASSWD: ALL' >> /etc/sudoers \
   && echo 'seluser:secret' | chpasswd
+
+#=====================================================================
+# Add an empty SeLion download.json. The dependencies will be in place
+#=====================================================================
+# Empty file to suppress downloads
+COPY download.json $SELION_HOME/config/download.json

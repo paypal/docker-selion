@@ -1,7 +1,7 @@
 #!/bin/bash
 export GEOMETRY="$SCREEN_WIDTH""x""$SCREEN_HEIGHT""x""$SCREEN_DEPTH"
 
-if [ ! -e /opt/selion/config.json ]; then
+if [ ! -e $SELION_HOME/config.json ]; then
   echo No SeLion Node configuration file, the node-base image is not intended to be run directly. 1>&2
   exit 1
 fi

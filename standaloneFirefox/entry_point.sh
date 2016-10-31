@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /opt/selion/functions.sh
+source $SELION_HOME/functions.sh
 
 export GEOMETRY="$SCREEN_WIDTH""x""$SCREEN_HEIGHT""x""$SCREEN_DEPTH"
 
@@ -14,8 +14,10 @@ if [ ! -z "$SELION_OPTS" ]; then
 fi
 
 SERVERNUM=$(get_server_num)
-xvfb-run -n $SERVERNUM --server-args="-screen 0 $GEOMETRY -ac +extension RANDR" \
+cd $SELION_HOME && xvfb-run -n $SERVERNUM --server-args="-screen 0 $GEOMETRY -ac +extension RANDR" \
   java -DselionHome=$SELION_HOME -jar $SELION_HOME/SeLion-Grid.jar \
+  ${JAVA_OPTS} \
+  -noContinuousRestart \
   ${SELION_OPTS} &
 NODE_PID=$!
 

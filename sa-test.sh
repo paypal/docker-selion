@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-
 DEBUG=''
-VERSION=${VERSION-local}
+VERSION=${VERSION-develop}
 
 if [ -n "$1" ] && [ $1 == 'debug' ]; then
   DEBUG='-debug'
@@ -40,3 +39,4 @@ function test_standalone {
 
 test_standalone firefox $DEBUG
 test_standalone chrome $DEBUG
+test_standalone phantomjs $DEBUG

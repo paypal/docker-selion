@@ -7,7 +7,7 @@ if [ -n "$1" ] && [ $1 == 'debug' ]; then
 fi
 
 echo Building test container image
-docker build -t selion/test:local ./test
+docker build -t selion/test:$VERSION ./test
 
 echo 'Starting Selion Hub Container...'
 HUB=$(docker run -d selion/hub:$VERSION)
@@ -32,7 +32,7 @@ function test_node {
   BROWSER=$1
   echo Running $BROWSER test...
   TEST_CMD="node smoke-$BROWSER.js"
-  docker run -it --link $HUB_NAME:hub -e TEST_CMD="$TEST_CMD" selion/test:local
+  docker run -it --link $HUB_NAME:hub -e TEST_CMD="$TEST_CMD" selion/test:$VERSION
   STATUS=$?
   TEST_CONTAINER=$(docker ps -aq | head -1)
 

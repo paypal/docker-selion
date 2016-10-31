@@ -15,8 +15,10 @@ Images included here:
 - __selion/node-base__: Base image for the SeLion node images
 - __selion/node-chrome__: SeLion node with Chrome installed, needs to be connected to a SeLion Grid Hub
 - __selion/node-firefox__: SeLion node with Firefox installed, needs to be connected to a SeLion Grid Hub
+- __selion/node-phantomjs__: SeLion node with Phantomjs installed, needs to be connected to a SeLion Grid Hub
 - __selion/standalone-chrome__: SeLion standalone with Chrome installed
 - __selion/standalone-firefox__: SeLion standalone with Firefox installed
+- __selion/standalone-phantomjs__: SeLion standalone with Phantomjs installed
 
 ## Running the images
 

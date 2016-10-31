@@ -13,11 +13,7 @@ RUN apt-get update -qqy \
 #========================
 # Selenium Configuration
 #========================
-COPY config.json /opt/selion/config.json
+COPY config.json $SELION_HOME/config.json
 
-# Empty file to suppress downloads
-COPY download.json $SELION_HOME/config/download.json
-
-RUN chown -R seluser /opt/selion
-
+RUN chown -R seluser $SELION_HOME
 USER seluser
