@@ -6,14 +6,11 @@
 # JAVA available on PATH
 
 CONF=$SELION_HOME/config/hubConfig.json
-SELCONF=$SELION_HOME/config/SelionConfig.json
 
 $SELION_HOME/generate_config >$CONF
-$SELION_HOME/generate_selionConfig >$SELCONF
 
 echo "starting selenium hub with configuration:"
 cat $CONF
-cat $SELCONF
 
 function shutdown {
     echo "shutting down hub.."
@@ -31,7 +28,6 @@ cd $SELION_HOME && java -DselionHome=$SELION_HOME ${JAVA_OPTS} \
   -jar $SELION_HOME/SeLion-Grid.jar \
   -role hub \
   -hubConfig $CONF \
-	-selionConfig $SELCONF \
   -continuousRestart false\
   -uniqueSessionCount $SELGRID_UNIQUE_SESSION_COUNT \
   -nodeRecycleThreadWaitTimeout $SELGRID_NODE_RECYCLE_THREAD_TIMEOUT \

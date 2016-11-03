@@ -1,6 +1,12 @@
-FROM node:4.5.0-onbuild
-
+FROM maven:3.3.9-jdk-8-alpine
 MAINTAINER Selion <selion@googlegroups.com>
 
-ENV TEST_CMD ""
-# The remainder of this build will be completed by the upstream image's ONBUILD commands
+ADD . /usr/src/app
+WORKDIR /usr/src/app
+RUN rm Dockerfile
+
+CMD mvn -B -q -s settings.xml test \
+-Dselion.version=$SELION_VERSION \
+-DSELION_BROWSER=$BROWSER \
+-DsuiteXmlFile=$TEST_SUITE \
+-DSELION_SELENIUM_HOST=$HUB_PORT_4444_TCP_ADDR

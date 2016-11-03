@@ -2,6 +2,9 @@ sudo: required
 language: c
 services:
   - docker
+cache:
+  directories:
+    - $TRAVIS_BUILD_DIR/test/.m2
 script:
   - docker version
   - VERSION=develop make ci

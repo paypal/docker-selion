@@ -1,0 +1,19 @@
+<settings>
+  <localRepository>.m2/</localRepository>
+
+  <profiles>
+    <profile>
+      <id>sonatype</id>
+      <repositories>
+        <repository>
+          <id>sonatype-nexus-snapshots</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>sonatype</activeProfile>
+  </activeProfiles>
+</settings>

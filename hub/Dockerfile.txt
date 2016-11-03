@@ -18,13 +18,6 @@ ENV SELGRID_NODE_RECYCLE_THREAD_TIMEOUT 1200
 COPY generate_config $SELION_HOME/generate_config
 RUN chmod 755 $SELION_HOME/generate_config
 
-# SeLionConfig.json configuration
-ENV SELGRID_RESTART_CYCLE 60000
-ENV SELGRID_NODE_AUTH "authorized"
-
-COPY generate_selionConfig $SELION_HOME/generate_selionConfig
-RUN chmod 755 $SELION_HOME/generate_selionConfig
-
 COPY entry_point.sh $SELION_HOME/entry_point.sh
 
 RUN chown -R seluser $SELION_HOME

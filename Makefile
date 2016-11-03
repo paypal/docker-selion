@@ -111,8 +111,6 @@ tag_latest:
 release: tag_latest deploy
 	@echo "*** Don't forget to create a tag. git tag v$(VERSION) && git push origin v$(VERSION)"
 
-dev_release: deploy
-
 deploy:
 	@echo "Deploying to docker registry ..."
 	@if ! docker images $(NAME)/base | awk '{ print $$2 }' | grep -q -F $(VERSION); then echo "$(NAME)/base version $(VERSION) is not yet built. Please run 'make build'"; false; fi
@@ -134,10 +132,14 @@ deploy:
 	docker push $(NAME)/standalone-firefox:$(VERSION)
 	docker push $(NAME)/standalone-phantomjs:$(VERSION)
 
-test:
+generate_test:
+	@echo "Setting up test dependencies ..."
+	cd ./test && ./generate.sh $(SELION_GRID_VERSION)
+
+test: generate_test
 	@echo "Running tests ..."
-	VERSION=$(VERSION) ./test.sh
-	VERSION=$(VERSION) ./sa-test.sh
+	VERSION=$(VERSION) SELION_VERSION=$(SELION_GRID_VERSION) ./test.sh
+	VERSION=$(VERSION) SELION_VERSION=$(SELION_GRID_VERSION) ./sa-test.sh
 
 clean:
 	@echo "Cleaning up generated Dockerfiles ..."
@@ -150,6 +152,9 @@ clean:
 	@if [ -f standaloneChrome/Dockerfile ]; then rm standaloneChrome/Dockerfile; fi
 	@if [ -f standaloneFirefox/Dockerfile ]; then rm standaloneFirefox/Dockerfile; fi
 	@if [ -f standalonePhantomjs/Dockerfile ]; then rm standalonePhantomjs/Dockerfile; fi
+	@echo "Cleaning up test dependencies ..."
+	@if [ -d test/.m2 ]; then rm -rf test/.m2; fi
+	@if [ -d test/target ]; then rm -rf test/target; fi
 	@echo "Removing all exited $(NAME) $(VERSION) containers ..."
 	@if [ `docker ps -a | grep $(NAME) | grep Exit | grep $(VERSION) | awk '{print $$1}' | wc -l | sed -e 's/^[ \t]*//'` -ne 0 ]; then\
 		docker rm `docker ps -a | grep Exit | grep $(NAME) | grep $(VERSION) | awk '{print $$1}'`;\
@@ -170,7 +175,6 @@ clean:
 	hub \
 	nodebase \
 	release \
-	sa-test \
 	standalone_chrome \
 	standalone_firefox \
 	standalone_phantomjs \

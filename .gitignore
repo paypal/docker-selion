@@ -7,3 +7,5 @@ nodePhantomjs/Dockerfile
 standalonePhantomjs/Dockerfile
 standaloneChrome/Dockerfile
 standaloneFirefox/Dockerfile
+.m2
+target

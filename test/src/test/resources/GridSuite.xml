@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" verbose="1" name="Smoke Tests" skipfailedinvocationcounts="false" junit="false"
+  parallel="false" data-provider-thread-count="1" annotations="JDK">
+  <test verbose="2" name="SmokeTest-Chrome" annotations="JDK">
+    <parameter name="browser" value="chrome" />
+    <classes>
+      <class name="SimpleTest" />
+    </classes>
+  </test>
+  <test verbose="2" name="SmokeTest-Firefox" annotations="JDK">
+    <parameter name="browser" value="firefox" />
+    <classes>
+      <class name="SimpleTest" />
+    </classes>
+  </test>
+  <test verbose="2" name="SmokeTest-Phantomjs" annotations="JDK">
+    <parameter name="browser" value="phantomjs" />
+    <classes>
+      <class name="SimpleTest" />
+    </classes>
+  </test>
+</suite>
