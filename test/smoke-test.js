@@ -4,8 +4,8 @@ chai.should();
 
 var wd = require('wd');
 
-module.exports = function(browserName) {
-  var logPrefix = ('[' + browserName + '] ').grey;
+module.exports = function(browserName, marionette) {
+  var logPrefix = ('[' + browserName + ',' + marionette + '] ').grey;
   var browser = wd.remote({
     hostname: process.env.HUB_PORT_4444_TCP_ADDR,
     port: process.env.HUB_PORT_4444_TCP_PORT
@@ -23,7 +23,8 @@ module.exports = function(browserName) {
   });
 
   browser.init({
-    browserName: browserName
+    browserName: browserName,
+    marionette: marionette
   }, function() {
     browser.get("https://www.wikipedia.org/", function() {
       browser.title(function(err, title) {

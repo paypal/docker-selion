@@ -32,7 +32,9 @@ cd $SELION_HOME && java -DselionHome=$SELION_HOME ${JAVA_OPTS} \
   -role hub \
   -hubConfig $CONF \
 	-selionConfig $SELCONF \
-  -noContinuousRestart \
+  -continuousRestart false\
+  -uniqueSessionCount $SELGRID_UNIQUE_SESSION_COUNT \
+  -nodeRecycleThreadWaitTimeout $SELGRID_NODE_RECYCLE_THREAD_TIMEOUT \
   ${SELION_OPTS} &
 NODE_PID=$!
 

@@ -1,1 +1,1 @@
-require('./smoke-test')('firefox');
+require('./smoke-test')('firefox', false);

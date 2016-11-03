@@ -15,9 +15,9 @@ fi
 
 SERVERNUM=$(get_server_num)
 cd $SELION_HOME && xvfb-run -n $SERVERNUM --server-args="-screen 0 $GEOMETRY -ac +extension RANDR" \
-  java -DselionHome=$SELION_HOME -jar $SELION_HOME/SeLion-Grid.jar \
+  java -Dwebdriver.firefox.marionette=false -DselionHome=$SELION_HOME -jar $SELION_HOME/SeLion-Grid.jar \
   ${JAVA_OPTS} \
-  -noContinuousRestart \
+  -continuousRestart false \
   ${SELION_OPTS} &
 NODE_PID=$!
 

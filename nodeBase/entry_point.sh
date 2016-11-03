@@ -33,7 +33,7 @@ cd $SELION_HOME && xvfb-run --server-args="$DISPLAY -screen 0 $GEOMETRY -ac +ext
     ${JAVA_OPTS} \
     -role node \
     -hub http://$HUB_PORT_4444_TCP_ADDR:$HUB_PORT_4444_TCP_PORT/grid/register \
-    -noContinuousRestart \
+    -continuousRestart false \
     ${REMOTE_HOST_PARAM} \
     -nodeConfig $SELION_HOME/config.json \
     ${SELION_OPTS} &
